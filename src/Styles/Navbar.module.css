@@ -1,0 +1,30 @@
+.container {
+    position: sticky;
+    top: 0px;
+    z-index: 1000;
+  }
+  /* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap'); */
+  @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap");
+  
+  .Navbar {
+    font-family: "DM Serif Display", serif;
+    font-size: 20px;
+    /* font-weight: bol d; */
+    /* color:   red; */
+    position: sticky;
+    top: 0px;
+    z-index: 1000;
+  }
+  .NavbarTitle > a {
+    padding: 3px 10px;
+    border-radius: 30px;
+    /* background-color: aqua; */
+    transition: 0.5s;
+  }
+  .NavbarTitle > a:hover {
+    background-color: royalblue;
+    color: white;
+    transition: 0.5s;
+    cursor: pointer;
+  }
+  

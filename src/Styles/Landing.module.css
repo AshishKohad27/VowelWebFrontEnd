@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap");
+
+.Container {
+}
+.Item {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 10px;
+}
+
+.Item h1 {
+  /* font-family: Oswald; */
+  font-size: 18px;
+  color: #4a5568;
+}
+.Item > a > div:nth-child(1) > img,
+.Item > div:nth-child(1) > img {
+  border-bottom: 1px solid #4a5568;
+}
+.Item > a > div:nth-child(2),
+.Item > div:nth-child(2) {
+  padding: 10px;
+}
