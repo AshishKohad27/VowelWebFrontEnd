@@ -122,10 +122,10 @@ export default function Navbar() {
                             <Heading>{userQuantity && userQuantity}</Heading>
 
                         </Flex>
-                        <Button onClick={handleClick}>Logout</Button>
-                        <Button>
-                            <Link to="/login">Login</Link>
-                        </Button>
+                        {isAuth ? <Button onClick={handleClick}>Logout</Button> :
+                            <Button>
+                                <Link to="/login">Login</Link>
+                            </Button>}
                         <Button>
                             <Link to="/signup">Signup</Link>
                         </Button>

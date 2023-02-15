@@ -13,7 +13,7 @@ export const postSign = (payload) => async (dispatch) => {
     // console.log('payload SignIn:', payload);
     dispatch({ type: SIGNUP_LOADING });
     try {
-        let res = await axios.post(`http://localhost:7878/user/signup`, payload);
+        let res = await axios.post(`https://odd-plum-monkey-cuff.cyclic.app/user/signup`, payload);
         // console.log('res:', res.data);
         dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
     } catch (e) {
@@ -25,7 +25,7 @@ export const postLogin = (payload) => async (dispatch) => {
     console.log('payload:', payload);
     dispatch({ type: LOGIN_LOADING });
     try {
-        let res = await axios.post(`http://localhost:7878/user/login`, payload);
+        let res = await axios.post(`https://odd-plum-monkey-cuff.cyclic.app/user/login`, payload);
         // console.log('res:', res);
         console.log('res:', res.data);
         dispatch({ type: LOGIN_SUCCESS, payload: res.data });
@@ -38,7 +38,7 @@ export const postLogin = (payload) => async (dispatch) => {
 export const postVerify = (payload) => async (dispatch) => {
     // console.log('payload Verify:', payload)
     try {
-        let res = await axios.post(`http://localhost:7878/user/verify`, payload);
+        let res = await axios.post(`https://odd-plum-monkey-cuff.cyclic.app/user/verify`, payload);
         dispatch({ type: VERIFY_SUCCESS, payload: res.data });
     } catch (e) {
         console.log("e:", e.message);

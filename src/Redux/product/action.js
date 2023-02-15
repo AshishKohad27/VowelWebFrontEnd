@@ -20,7 +20,7 @@ import {
 export const getAllProducts = (payload) => async (dispatch) => {
   try {
     dispatch({ type: GET_ALL_PRODUCTS_REQUEST });
-    const res = await axios.get(`http://localhost:7878/data?page=${payload}`);
+    const res = await axios.get(`https://odd-plum-monkey-cuff.cyclic.app/data?page=${payload}`);
     dispatch({ type: GET_ALL_PRODUCTS_SUCCESS, payload: res.data });
   } catch (error) {
     dispatch({
@@ -34,7 +34,7 @@ export const getSingleProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: GET_SINGLE_PRODUCT_REQUEST });
 
-    const res = await axios.get(`http://localhost:7878/data/${id}`);
+    const res = await axios.get(`https://odd-plum-monkey-cuff.cyclic.app/data/${id}`);
 
     dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: res.data });
   } catch (error) {
@@ -51,7 +51,7 @@ export const addProduct = (payload) => async (dispatch) => {
   console.log("payload:---", payload.payload)
   try {
     dispatch({ type: ADD_PRODUCT_REQUEST });
-    const res = await axios.post("http://localhost:7878/data/add", payload);
+    const res = await axios.post("https://odd-plum-monkey-cuff.cyclic.app/data/add", payload);
     console.log('res:', res)
     dispatch({ type: ADD_PRODUCT_SUCCESS, payload: res.data });
   } catch (error) {
@@ -66,7 +66,7 @@ export const addProduct = (payload) => async (dispatch) => {
 export const updateProduct = (payload) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
-    let res = await axios.patch(`http://localhost:7878/data`, payload);
+    let res = await axios.patch(`https://odd-plum-monkey-cuff.cyclic.app/data`, payload);
     console.log('res:', res)
     dispatch({ type: UPDATE_PRODUCT_SUCCESS, payload: res.data });
   } catch (error) {
@@ -81,7 +81,7 @@ export const deleteProduct = (payload) => async (dispatch) => {
   console.log('payload Delete Id:', payload._id)
   try {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
-    let res = await axios.delete(`http://localhost:7878/data/${payload._id}`);
+    let res = await axios.delete(`https://odd-plum-monkey-cuff.cyclic.app/data/${payload._id}`);
     console.log('res:', res)
     dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: res.data });
   } catch (error) {
