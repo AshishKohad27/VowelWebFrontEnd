@@ -40,7 +40,7 @@ export default function EditItem({ item }) {
     };
 
     const handleEdit = () => {
-     
+
         dispatch(updateProduct(form));
     };
 
@@ -89,6 +89,7 @@ export default function EditItem({ item }) {
                             <Input
                                 mt="10px"
                                 placeholder="Price"
+                                type="number"
                                 name="price"
                                 value={price}
                                 onChange={handleChange}
@@ -96,6 +97,7 @@ export default function EditItem({ item }) {
                             <Input
                                 mt="10px"
                                 placeholder="MRP"
+                                type="number"
                                 name="mrp"
                                 value={mrp}
                                 onChange={handleChange}

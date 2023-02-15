@@ -42,7 +42,7 @@ export default function AddItem() {
     const handleAdd = () => {
 
         dispatch(addProduct(form));
-        console.log("form:",form);
+        console.log("form:", form);
 
     };
 
@@ -91,6 +91,7 @@ export default function AddItem() {
                             <Input
                                 mt="10px"
                                 placeholder="Price"
+                                type="number"
                                 name="price"
                                 value={price}
                                 onChange={handleChange}
@@ -98,6 +99,7 @@ export default function AddItem() {
                             <Input
                                 mt="10px"
                                 placeholder="MRP"
+                                type="number"
                                 name="mrp"
                                 value={mrp}
                                 onChange={handleChange}

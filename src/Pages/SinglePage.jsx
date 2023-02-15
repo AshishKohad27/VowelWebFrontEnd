@@ -14,6 +14,16 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { useRouter } from "next/router";
 import { getAllProducts, getSingleProduct } from "../Redux/product/action";
+import axios from "axios";
+import { postVerify } from "../Redux/user/user.action";
+import { addItemInCart, getCartUser } from "../Redux/cart/action";
+
+
+
+const SendToken = {
+    token: "",
+};
+let payload;
 
 export default function SinglePage() {
     const { productID } = useParams();
@@ -21,6 +31,8 @@ export default function SinglePage() {
     const dispatch = useDispatch();
     const { product, loading, error, errorMessage, message, singleData } =
         useSelector((store) => store.product);
+    const { tokenDetails, isAuth } = useSelector((store) => store.user);
+    const { userQuantity } = useSelector((store) => store.cart);
     // console.log("singleData:", singleData);
 
     useEffect(() => {
@@ -36,6 +48,13 @@ export default function SinglePage() {
     //     const { id } = router.query;
     const toast = useToast();
 
+    console.log("isAuth:", isAuth);
+
+    useEffect(() => {
+        SendToken.token = axios.defaults.headers.common["authorization"];
+        dispatch(postVerify(SendToken));
+    }, [isAuth, dispatch]);
+
     useEffect(() => {
         if (message) {
             toast({
@@ -49,9 +68,46 @@ export default function SinglePage() {
         }
     }, [dispatch, toast]);
 
-    // useEffect(() => {
-    //     // dispatch(getSingleProduct(id));
-    // }, [dispatch])
+    console.log("quantity:", quantity)
+
+    useEffect(() => {
+
+        payload = {
+            "userID": tokenDetails && tokenDetails.id,
+            "quantityUser": 0,
+            "image": singleData.image,
+            "title": singleData.title,
+            "price": singleData.price,
+            "mrp": singleData.mrp,
+            "category": singleData.category,
+            "quantity": quantity,
+            "discount": singleData.discount
+        }
+        // dispatch(getSingleProduct(id));
+    }, [dispatch, quantity])
+
+    const handleAddToCart = () => {
+
+        if (quantity === 0) {
+            toast({
+                title: "Please Select Quantity",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+                position: "top",
+            });
+            return;
+        }
+        // dispatch(addItemCart({ productId: singleData._id, quantity }))
+        console.log(payload)
+        dispatch(addItemInCart(payload));
+
+        const payloadUserId = {
+            "userID": tokenDetails && tokenDetails.id,
+        }
+        dispatch(getCartUser(payloadUserId));
+    }
+
 
     if (error) {
         return <Box>
@@ -73,7 +129,7 @@ export default function SinglePage() {
                                 <Img
                                     margin={"auto"}
                                     width={"400px"}
-                                    src={singleData.image && singleData.image}
+                                    src={singleData && singleData.image}
                                 />
                             </Box>
                         </Box>
@@ -81,18 +137,16 @@ export default function SinglePage() {
                         <Box p={4}>
                             <Heading as={"h5"} size="md" fontWeight={700} color="gray.600">
                                 {" "}
-                                {singleData.title}
+                                {singleData && singleData.title}
                             </Heading>
 
-                            <Text mt={3} fontSize={14} color={"teal.500"} cursor="pointer">
-                                Visit PharmEasy Store
-                            </Text>
+
 
                             <Flex gap={{ base: "80px", sm: "200px", lg: "200px" }}>
                                 <Flex gap={4}>
                                     <Text fontSize={22} fontWeight={500}>
                                         {" "}
-                                        ₹{singleData.price}
+                                        ₹{singleData && singleData.price}
                                     </Text>
                                     <Text color="grey" mt="1">
                                         MRP
@@ -104,7 +158,7 @@ export default function SinglePage() {
                                         color="grey"
                                     >
                                         {" "}
-                                        ₹{singleData.mrp}
+                                        ₹{singleData && singleData.mrp}
                                     </Text>
                                     <Text
                                         padding={2}
@@ -112,7 +166,7 @@ export default function SinglePage() {
                                         color="white"
                                         background={"#f47779"}
                                     >
-                                        {singleData.discount}
+                                        {singleData && singleData.discount}
                                     </Text>
                                 </Flex>
                             </Flex>
@@ -129,25 +183,14 @@ export default function SinglePage() {
                                 placeholder="Select Quantity"
                                 onChange={(e) => setQuantity(e.target.value)}
                             >
+
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </Select>
                             <Button
                                 mt="6"
-                                onClick={() => {
-                                    if (quantity === 0) {
-                                        toast({
-                                            title: "Please Select Quantity",
-                                            status: "error",
-                                            duration: 3000,
-                                            isClosable: true,
-                                            position: "top",
-                                        });
-                                        return;
-                                    }
-                                    // dispatch(addItemCart({ productId: singleData._id, quantity }))
-                                }}
+                                onClick={() => handleAddToCart()}
                                 background={"#10847e"}
                                 _hover={{ background: "#14918b" }}
                                 color="white"

@@ -25,6 +25,7 @@ export const getAllProducts = (payload) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_PRODUCTS_ERROR,
+      payload: error.response.data
     });
   }
 };
@@ -39,6 +40,7 @@ export const getSingleProduct = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_SINGLE_PRODUCT_ERROR,
+      payload: error.response.data
     });
   }
 };
@@ -70,6 +72,7 @@ export const updateProduct = (payload) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPDATE_PRODUCT_ERROR,
+      payload: error.response.data
     });
   }
 };

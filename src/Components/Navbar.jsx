@@ -23,8 +23,8 @@ import styles from "../Styles/Navbar.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-// import { postVerify } from "../redux/user/user.action";
-// import { LOGOUT } from "../redux/user/user.type";
+import { postVerify } from "../Redux/user/user.action";
+import { LOGOUT } from "../Redux/user/user.type";
 
 const SendToken = {
     token: "",
@@ -38,21 +38,22 @@ export default function Navbar() {
     console.log(click);
 
     const dispatch = useDispatch();
-    // const { tokenDetails, isAuth } = useSelector((store) => store.user);
-    // console.log("isAuth:", isAuth);
+    const { tokenDetails, isAuth } = useSelector((store) => store.user);
+    const { userQuantity } = useSelector((store) => store.cart);
+    console.log("isAuth:", isAuth);
 
-    // useEffect(() => {
-    // SendToken.token = axios.defaults.headers.common["authorization"];
-    // dispatch(postVerify(SendToken));
-    // }, [isAuth, dispatch]);
+    useEffect(() => {
+        SendToken.token = axios.defaults.headers.common["authorization"];
+        dispatch(postVerify(SendToken));
+    }, [isAuth, dispatch]);
 
     const handleClick = () => {
-        // dispatch({ type: LOGOUT });
+        dispatch({ type: LOGOUT });
     };
 
     return (
         <>
-            <Box bg="#1D4044" color="white" px={4} className={styles.Navbar}>
+            <Box bg="#1D4044" color="black" px={4} className={styles.Navbar}>
                 <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
                     <IconButton
                         size={"md"}
@@ -65,8 +66,8 @@ export default function Navbar() {
                         <Box>
                             <Link
                                 to="/"
-                               
-                                
+
+
                                 offset={-150}
                                 duration={500}
                                 onClick={closeMenu}
@@ -82,8 +83,8 @@ export default function Navbar() {
                         >
                             <Link
                                 to="/"
-                              
-                                
+
+
                                 offset={-100}
                                 duration={500}
                                 onClick={closeMenu}
@@ -92,8 +93,44 @@ export default function Navbar() {
                                     Home
                                 </Heading>
                             </Link>
+                            {tokenDetails && tokenDetails.role === "Admin" ? <Link
+                                to="/admin"
+
+
+                                offset={-100}
+                                duration={500}
+                                onClick={closeMenu}
+                            >
+                                <Heading as="h1" fontSize="26px">
+                                    Admin
+                                </Heading>
+                            </Link> : null}
+
+                            <Heading>
+                                {tokenDetails && tokenDetails.name}
+                            </Heading>
+
+
                         </HStack>
                     </HStack>
+
+                    <Flex alignItems={"center"}>
+                        <Flex gap="10px">
+                            <Heading>{userQuantity && userQuantity}</Heading>
+                            <Heading>
+                                <Link to="/cart">Cart</Link>
+                            </Heading>
+
+                        </Flex>
+                        <Button onClick={handleClick}>Logout</Button>
+                        <Button>
+                            <Link to="/login">Login</Link>
+                        </Button>
+                        <Button>
+                            <Link to="/signup">Signup</Link>
+                        </Button>
+                    </Flex>
+
                 </Flex>
 
                 {isOpen ? (
@@ -104,8 +141,8 @@ export default function Navbar() {
                             ))} */}
                             <Link
                                 to="/"
-                               
-                                
+
+
                                 offset={-100}
                                 duration={500}
                                 onClick={closeMenu}

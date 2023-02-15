@@ -1,0 +1,54 @@
+
+/* Bill Summary */
+.billSummary {
+    margin: 24px auto;
+    padding: 24px;
+    font-family: sans-serif;
+    border: 1px solid #e2e4e6;
+    border-radius: 10px;
+  }
+  .billSummary > h1:nth-child(1) {
+    font-size: 18px;
+  }
+  .billSummary > div:nth-child(2) {
+    border-bottom: 1px solid #e2e4e6;
+  }
+  .billSummary > div:nth-child(2) > div,
+  .billSummary > div:nth-child(3) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .billSummary > div:nth-child(2) > div {
+    /* margin-top: 10px; */
+    /* border-bottom: 1px solid #e2e4e6; */
+    padding: 2px 0px 12px;
+  }
+  .billSummary > div:nth-child(2) > div > h1 {
+    font-size: 14px;
+    /* color: #6e787e; */
+    font-weight: 500;
+  }
+  .charges > span:nth-child(1) {
+    color: #6e787e;
+  }
+  .freeCharges {
+    color: #10847e;
+  }
+  .crossSaving {
+    text-decoration: line-through;
+  }
+  .billSummary > div:nth-child(3) {
+    margin-top: 10px;
+    padding: 24px 0px 12px;
+  }
+  .billSummary > div:nth-child(3) > h1 {
+    font-size: 16px;
+  }
+  
+  .paymentMethodCss {
+    padding: 5px 14px 10px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+  }

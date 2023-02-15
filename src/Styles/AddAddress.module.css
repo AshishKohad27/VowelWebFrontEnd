@@ -1,0 +1,14 @@
+
+.addressHead {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.addressHead > h1 {
+  color: #30363c;
+  font-size: 22px;
+}
+.addressContent > div {
+  margin-top: 30px;
+}
