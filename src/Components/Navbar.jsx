@@ -114,12 +114,12 @@ export default function Navbar() {
                         </HStack>
                     </HStack>
 
-                    <Flex alignItems={"center"}>
+                    <Flex alignItems={"center"} gap="15px">
                         <Flex gap="10px">
-                            <Heading>{userQuantity && userQuantity}</Heading>
                             <Heading>
                                 <Link to="/cart">Cart</Link>
                             </Heading>
+                            <Heading>{userQuantity && userQuantity}</Heading>
 
                         </Flex>
                         <Button onClick={handleClick}>Logout</Button>
